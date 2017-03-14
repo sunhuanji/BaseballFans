@@ -70,8 +70,8 @@ struct ChatFunctions{
             }) { (error) in
                 
                 DispatchQueue.main.async(execute: {
-                    let alertView =  SCLAlertView()
-                    _ = alertView.showError("ERROR", subTitle: error.localizedDescription)
+//                    let alertView =  SCLAlertView()
+//                    _ = alertView.showError("ERROR", subTitle: error.localizedDescription)
                 })        }
         
         

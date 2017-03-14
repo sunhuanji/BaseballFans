@@ -57,8 +57,9 @@ class MyProfileViewController: UIViewController {
                 
                 FIRStorage.storage().reference(forURL: user.photoURL).data(withMaxSize: 1 * 1024 * 1024, completion: { (imgData, error) in
                     if let error = error {
-                        let alertView = SCLAlertView()
-                        _ = alertView.showError("ERROR", subTitle: error.localizedDescription)
+                        print(error)
+//                        let alertView = SCLAlertView()
+//                        _ = alertView.showError("ERROR", subTitle: error.localizedDescription)
                         
                     }else{
                         
@@ -77,8 +78,8 @@ class MyProfileViewController: UIViewController {
             
             
         }) { (error) in
-            let alertView = SCLAlertView()
-            _ = alertView.showError("ERROR", subTitle: error.localizedDescription)
+//            let alertView = SCLAlertView()
+//            _ = alertView.showError("ERROR", subTitle: error.localizedDescription)
             
         }
 
@@ -96,8 +97,9 @@ class MyProfileViewController: UIViewController {
             
         }
         catch let error as NSError {
-            let alertView = SCLAlertView()
-            _ = alertView.showError("ERROR", subTitle: error.localizedDescription)
+            print(error)
+//            let alertView = SCLAlertView()
+//            _ = alertView.showError("ERROR", subTitle: error.localizedDescription)
         }
         
     }

@@ -108,8 +108,8 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
             self.finishReceivingMessage()
             
         }) { (error) in
-            let alertView = SCLAlertView()
-            _ = alertView.showError("ERROR", subTitle: error.localizedDescription)
+//            let alertView = SCLAlertView()
+//            _ = alertView.showError("ERROR", subTitle: error.localizedDescription)
         }
         
 
@@ -138,8 +138,8 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
             
             
             }) { (error) in
-                let alertView = SCLAlertView()
-                _ = alertView.showError("ERROR", subTitle: error.localizedDescription)
+//                let alertView = SCLAlertView()
+//                _ = alertView.showError("ERROR", subTitle: error.localizedDescription)
         }
         
         
@@ -164,8 +164,8 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "updateDiscussions"), object: nil)
                  
                     }else {
-                        let alertView = SCLAlertView()
-                        _ = alertView.showError("ERROR", subTitle: error!.localizedDescription)
+//                        let alertView = SCLAlertView()
+//                        _ = alertView.showError("ERROR", subTitle: error!.localizedDescription)
 
                     }
                     
@@ -176,8 +176,8 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
                     if error == nil {
                                                 
                     }else {
-                        let alertView = SCLAlertView()
-                        _ = alertView.showError("ERROR", subTitle: error!.localizedDescription)
+//                        let alertView = SCLAlertView()
+//                        _ = alertView.showError("ERROR", subTitle: error!.localizedDescription)
                         
                     }
                 })
@@ -186,8 +186,8 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
                 self.finishSendingMessage()
                 
             }else {
-                let alertView = SCLAlertView()
-                _ = alertView.showError("ERROR", subTitle: error!.localizedDescription)
+//                let alertView = SCLAlertView()
+//                _ = alertView.showError("ERROR", subTitle: error!.localizedDescription)
             }
         }
     }

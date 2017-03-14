@@ -71,8 +71,8 @@ class ConversationsTableViewController: UITableViewController {
             
             
             }) { (error) in
-                let alertView = SCLAlertView()
-                _ = alertView.showError("ERROR", subTitle: error.localizedDescription)
+//                let alertView = SCLAlertView()
+//                _ = alertView.showError("ERROR", subTitle: error.localizedDescription)
                 
 
         }
@@ -105,8 +105,8 @@ class ConversationsTableViewController: UITableViewController {
             
             
         }) { (error) in
-            let alertView = SCLAlertView()
-            _ = alertView.showError("ERROR", subTitle: error.localizedDescription)
+//            let alertView = SCLAlertView()
+//            _ = alertView.showError("ERROR", subTitle: error.localizedDescription)
             
             
         }
@@ -167,8 +167,9 @@ class ConversationsTableViewController: UITableViewController {
         if let urlString = userPhotoUrlString {
             storageRef.reference(forURL: urlString).data(withMaxSize: 1 * 1024 * 1024, completion: { (imgData, error) in
                 if let error = error {
-                    let alertView = SCLAlertView()
-                    _ = alertView.showError("ERROR", subTitle: error.localizedDescription)
+                    print(error)
+//                    let alertView = SCLAlertView()
+//                    _ = alertView.showError("ERROR", subTitle: error.localizedDescription)
                 }else {
                     
                     DispatchQueue.main.async(execute: { 

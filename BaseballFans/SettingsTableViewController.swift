@@ -63,8 +63,8 @@ class SettingsTableViewController: UITableViewController, UIImagePickerControlle
             
             
         }) { (error) in
-            let alertView = SCLAlertView()
-            _ = alertView.showError("ERROR", subTitle: error.localizedDescription)
+//            let alertView = SCLAlertView()
+//            _ = alertView.showError("ERROR", subTitle: error.localizedDescription)
             
         }
         
@@ -107,8 +107,8 @@ class SettingsTableViewController: UITableViewController, UIImagePickerControlle
                         if error == nil{
                         
                         }else{
-                            let alertView = SCLAlertView()
-                            _ = alertView.showError("ERROR", subTitle: (error?.localizedDescription)!)
+//                            let alertView = SCLAlertView()
+//                            _ = alertView.showError("ERROR", subTitle: (error?.localizedDescription)!)
                         }
                     })
                     
@@ -127,23 +127,23 @@ class SettingsTableViewController: UITableViewController, UIImagePickerControlle
                                 })
                                 
                             }else {
-                                let alertView = SCLAlertView()
-                                _ = alertView.showError("ERROR", subTitle: error!.localizedDescription)
+//                                let alertView = SCLAlertView()
+//                                _ = alertView.showError("ERROR", subTitle: error!.localizedDescription)
                                 
                             }
                         })
                         
                     }else {
-                        let alertView = SCLAlertView()
-                        _ = alertView.showError("ERROR", subTitle: error!.localizedDescription)
+//                        let alertView = SCLAlertView()
+//                        _ = alertView.showError("ERROR", subTitle: error!.localizedDescription)
                         
                     }
                 })
                 
                 
             }}) { (error) in
-                let alertView = SCLAlertView()
-                _ = alertView.showError("ERROR", subTitle: error.localizedDescription)
+//                let alertView = SCLAlertView()
+//                _ = alertView.showError("ERROR", subTitle: error.localizedDescription)
                 
             }
             

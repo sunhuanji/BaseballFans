@@ -118,14 +118,14 @@ class EditProfileTableViewController: UITableViewController, UIImagePickerContro
                         })  }
                     
                 }else {
-                    let alertView = SCLAlertView()
-                    _ = alertView.showError("ERROR", subTitle: error!.localizedDescription)
+//                    let alertView = SCLAlertView()
+//                    _ = alertView.showError("ERROR", subTitle: error!.localizedDescription)
                 }
             })
             
         }) { (error) in
-            let alertView = SCLAlertView()
-            _ = alertView.showError("ERROR", subTitle: error.localizedDescription)
+//            let alertView = SCLAlertView()
+//            _ = alertView.showError("ERROR", subTitle: error.localizedDescription)
             
         }
 
@@ -170,8 +170,8 @@ class EditProfileTableViewController: UITableViewController, UIImagePickerContro
                             print("email updated successfully")
                         }else {
                             DispatchQueue.main.async(execute: {
-                                let alertView =  SCLAlertView()
-                                _ = alertView.showError("ERROR", subTitle: error!.localizedDescription)
+//                                let alertView =  SCLAlertView()
+//                                _ = alertView.showError("ERROR", subTitle: error!.localizedDescription)
                             })
                         }
                     })
@@ -196,8 +196,8 @@ class EditProfileTableViewController: UITableViewController, UIImagePickerContro
                                     _ = self.navigationController?.popToRootViewController(animated: true)
                                 }else {
                                     DispatchQueue.main.async(execute: {
-                                        let alertView =  SCLAlertView()
-                                        _ = alertView.showError("ERROR", subTitle: error!.localizedDescription)
+//                                        let alertView =  SCLAlertView()
+//                                        _ = alertView.showError("ERROR", subTitle: error!.localizedDescription)
                                     })
                                     
                                 }
@@ -206,8 +206,8 @@ class EditProfileTableViewController: UITableViewController, UIImagePickerContro
                         else {
                             
                             DispatchQueue.main.async(execute: {
-                                let alertView =  SCLAlertView()
-                                _ = alertView.showError("ERROR", subTitle: error!.localizedDescription)
+//                                let alertView =  SCLAlertView()
+//                                _ = alertView.showError("ERROR", subTitle: error!.localizedDescription)
                             })
                         }
                         
@@ -215,8 +215,8 @@ class EditProfileTableViewController: UITableViewController, UIImagePickerContro
                 }else {
                     
                     DispatchQueue.main.async(execute: {
-                        let alertView =  SCLAlertView()
-                        _ = alertView.showError("ERROR", subTitle: error!.localizedDescription)
+//                        let alertView =  SCLAlertView()
+//                        _ = alertView.showError("ERROR", subTitle: error!.localizedDescription)
                     })
                 }
             }

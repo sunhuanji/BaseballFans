@@ -65,8 +65,8 @@ class UsersTableViewController: UITableViewController {
             
             
             }) { (error) in
-                let alertView = SCLAlertView()
-                _ = alertView.showError("ERROR", subTitle: error.localizedDescription)
+//                let alertView = SCLAlertView()
+//                _ = alertView.showError("ERROR", subTitle: error.localizedDescription)
                 
 
         }
@@ -106,8 +106,9 @@ class UsersTableViewController: UITableViewController {
         cell.userTeamNameLabel.text = usersArray[indexPath.row].teamName
         storageRef.reference(forURL: usersArray[indexPath.row].photoURL).data(withMaxSize: 1 * 1024 * 1024) { (imgData, error) in
             if let error = error {
-                let alertView = SCLAlertView()
-                _ = alertView.showError("ERROR", subTitle: error.localizedDescription)
+                print(error)
+//                let alertView = SCLAlertView()
+//                _ = alertView.showError("ERROR", subTitle: error.localizedDescription)
             }else {
                 DispatchQueue.main.async(execute: { 
                     if let data = imgData {

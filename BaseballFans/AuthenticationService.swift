@@ -55,8 +55,8 @@ struct AuthenticationService {
             }else {
                 
                 DispatchQueue.main.async(execute: {
-                    let alertView =  SCLAlertView()
-                    _ = alertView.showError("ERROR", subTitle: error!.localizedDescription)
+//                    let alertView =  SCLAlertView()
+//                    _ = alertView.showError("ERROR", subTitle: error!.localizedDescription)
                 })
             }
         })
@@ -75,8 +75,8 @@ struct AuthenticationService {
             }else {
                 DispatchQueue.main.async(execute: {
 
-                let alertView =  SCLAlertView()
-                _ = alertView.showError("ERROR", subTitle: error!.localizedDescription)
+//                let alertView =  SCLAlertView()
+//                _ = alertView.showError("ERROR", subTitle: error!.localizedDescription)
                 })
             }
         })
@@ -98,8 +98,8 @@ struct AuthenticationService {
                 
             }else {
                 DispatchQueue.main.async(execute: {
-                let alertView =  SCLAlertView()
-                _ = alertView.showError("ERROR", subTitle: error!.localizedDescription)
+//                let alertView =  SCLAlertView()
+//                _ = alertView.showError("ERROR", subTitle: error!.localizedDescription)
                      })
             }
         })
@@ -135,16 +135,16 @@ struct AuthenticationService {
                     else {
                         
                         DispatchQueue.main.async(execute: {
-                            let alertView =  SCLAlertView()
-                            _ = alertView.showError("ERROR", subTitle: error!.localizedDescription)
+//                            let alertView =  SCLAlertView()
+//                            _ = alertView.showError("ERROR", subTitle: error!.localizedDescription)
                         })                    }
                     
                 })
             }else {
                 
                 DispatchQueue.main.async(execute: {
-                    let alertView =  SCLAlertView()
-                    _ = alertView.showError("ERROR", subTitle: error!.localizedDescription)
+//                    let alertView =  SCLAlertView()
+//                    _ = alertView.showError("ERROR", subTitle: error!.localizedDescription)
                 })
             }
         }
