@@ -7,16 +7,31 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        application.statusBarStyle = .lightContent
+        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for: .selected)
+        FIRApp.configure()
+        logUser()
         return true
+    }
+    
+    func logUser(){
+        
+        if FIRAuth.auth()!.currentUser != nil {
+            
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UITabBarController
+            window?.rootViewController = vc
+        }   
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

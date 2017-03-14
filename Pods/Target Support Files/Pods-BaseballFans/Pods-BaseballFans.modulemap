@@ -1,0 +1,6 @@
+framework module Pods_BaseballFans {
+  umbrella header "Pods-BaseballFans-umbrella.h"
+
+  export *
+  module * { export * }
+}
