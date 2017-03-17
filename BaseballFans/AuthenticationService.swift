@@ -26,9 +26,9 @@ struct AuthenticationService {
     }
     
     // 3 - We save the user info in the Database
-    fileprivate func saveInfo(_ user: FIRUser!, username: String, password: String, teamName: String, account: String, biography:String){
+    fileprivate func saveInfo(_ user: FIRUser!, username: String, password: String, teamName: String, followingsNum:Int,followersNum:Int, gender:String, age:String, account: String, biography:String){
         
-        let userInfo = ["email": user.email!, "username": username, "teamName": teamName, "account": account,"biography":biography, "uid": user.uid, "photoURL": String(describing: user.photoURL!)]
+        let userInfo = ["email": user.email!, "username": username, "teamName": teamName, "account": account, "followingsNum":followingsNum,"followersNum":followersNum, "gender":gender, "age":age, "biography":biography, "uid": user.uid, "photoURL": String(describing: user.photoURL!)] as [String : Any]
         
         let userRef = databaseRef.child("users").child(user.uid)
         
@@ -69,7 +69,7 @@ struct AuthenticationService {
         FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
             if error == nil {
                 
-                self.setUserInfo(user, username: username, password: password, teamName: teamName, account: account, biography:"", data: data)
+                self.setUserInfo(user, username: username, password: password, teamName: teamName, followingsNum:0,followersNum:0, gender:"", age:"", account: account, biography:"", data: data)
                 
                 
             }else {
@@ -107,7 +107,7 @@ struct AuthenticationService {
     }
     
     // 2 - We set the User Info
-    fileprivate  func setUserInfo(_ user: FIRUser!, username: String, password: String, teamName: String, account: String, biography:String, data: Data!){
+    fileprivate  func setUserInfo(_ user: FIRUser!, username: String, password: String, teamName: String, followingsNum:Int,followersNum:Int, gender:String, age:String, account: String, biography:String, data: Data!){
         
         let imagePath = "profileImage\(user.uid)/userPic.jpg"
         
@@ -130,7 +130,7 @@ struct AuthenticationService {
                 changeRequest.commitChanges(completion: { (error) in
                     if error == nil {
                         
-                        self.saveInfo(user, username: username, password: password, teamName: teamName, account: account, biography:biography)
+                        self.saveInfo(user, username: username, password: password, teamName: teamName, followingsNum:followingsNum,followersNum:followingsNum, gender:gender, age:age, account: account, biography:biography)
                     }
                     else {
                         

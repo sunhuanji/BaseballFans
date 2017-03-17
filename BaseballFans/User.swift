@@ -20,6 +20,10 @@ struct User {
     var uid: String!
     var ref: FIRDatabaseReference?
     var key: String?
+    var followingsNum:Int?
+    var followersNum:Int?
+    var gender:String?
+    var age:String?
     
     init(snapshot: FIRDataSnapshot){
         
@@ -34,6 +38,10 @@ struct User {
         biography = values["biography"] as? String
         photoURL = values["photoURL"] as! String
         uid = values["uid"] as? String
+        followingsNum = values["followingsNum"] as? Int
+        followersNum = values["followersNum"] as? Int
+        gender = values["gender"] as? String
+        age = values["age"] as? String
 
     }
     
@@ -41,6 +49,11 @@ struct User {
         self.username = username
         self.uid = userId
         self.photoURL = photoUrl
+    }
+    
+    func toAnyObject() -> [String: AnyObject]{
+        
+        return ["username": username as AnyObject,"email": email as AnyObject, "teamName": teamName as AnyObject,"account":account as AnyObject, "biography":biography as AnyObject,"photoURL":photoURL as AnyObject,"uid":uid as AnyObject,"followingsNum":followingsNum as AnyObject,"followersNum":followersNum as AnyObject,"gender":gender as AnyObject,"age":age as AnyObject]
     }
     
 }

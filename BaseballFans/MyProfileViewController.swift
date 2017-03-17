@@ -18,6 +18,10 @@ class MyProfileViewController: UIViewController {
     @IBOutlet weak var country: UILabel!
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var userImageView: UIImageView!
+    @IBOutlet weak var gender: UILabel!
+    @IBOutlet weak var age: UILabel!
+    @IBOutlet weak var followingsNum: UILabel!
+    @IBOutlet weak var followersNum: UILabel!
     
     var user: User!
     
@@ -48,6 +52,10 @@ class MyProfileViewController: UIViewController {
                 self.username.text = user.username
                 self.account.text = "@"+user.account
                 self.country.text = user.teamName
+                self.gender.text = user.gender
+                self.age.text = user.age
+                self.followingsNum.text = "\(user.followingsNum!)"
+                self.followersNum.text = "\(user.followersNum!)"
                 
                 if user.biography == ""{
                   self.biography.text = "This person is so lazy and wrote nothing here..."

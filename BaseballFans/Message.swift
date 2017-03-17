@@ -31,8 +31,8 @@ struct Message {
         self.senderId = values["senderId"] as! String
         self.mediaType = values["mediaType"] as! String
         self.mediaUrl = values["mediaUrl"] as! String
-        self.ref = snapshot.ref
-        self.key = snapshot.key
+//        self.ref = snapshot.ref
+//        self.key = snapshot.key
 
     }
     

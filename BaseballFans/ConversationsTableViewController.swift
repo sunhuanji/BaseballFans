@@ -204,15 +204,15 @@ class ConversationsTableViewController: UITableViewController {
         performSegue(withIdentifier: "goToChat1", sender: self)
     }
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            
-            self.chatsArray[indexPath.row].ref?.removeValue()
-            self.chatsArray.remove(at: indexPath.row)
-            self.tableView.reloadData()
-        
-        }
-    }
+//    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//            
+//            self.chatsArray[indexPath.row].ref?.removeValue()
+//            self.chatsArray.remove(at: indexPath.row)
+//            self.tableView.reloadData()
+//        
+//        }
+//    }
     
     
     

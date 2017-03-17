@@ -12,6 +12,8 @@ import FirebaseStorage
 
 class EditProfileTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
 
+    @IBOutlet weak var ageTextField: UITextField!
+    @IBOutlet weak var genderTextField: UITextField!
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
@@ -29,8 +31,16 @@ class EditProfileTableViewController: UITableViewController, UIImagePickerContro
     }
 
     
-    var pickerView: UIPickerView!
+    var pickerView1: UIPickerView!
+    var pickerView2:UIPickerView!
+    var pickerView3:UIPickerView!
+    
+    var genderArrays = ["Male","Female","Secret"]
+    var ageArrays = ["10代","20代前半","20代後半","30代前半","30代後半","40代前半","40代後半","50代~","非公開"]
     var teamArrays = ["福岡ソフトバンクホークス","北海道日本ハムファイターズ","埼玉西武ライオンズ","オリックス・バファローズ","東北楽天ゴールデンイーグルス","千葉ロッテマリーンズ","中日ドラゴンズ","東京ヤクルトスワローズ","読売ジャイアンツ","阪神タイガース","広島東洋カープ","横浜DeNAベイスターズ"]
+    var arraysFlag
+        = 1
+    var showArrays:[String] = []
     var user: User!
     
     override func viewDidLoad() {
@@ -42,12 +52,27 @@ class EditProfileTableViewController: UITableViewController, UIImagePickerContro
         emailTextField.delegate = self
         teamNameTextField.delegate = self
         biographyTextField.delegate = self
+        genderTextField.delegate = self
+        ageTextField.delegate = self
         
-        pickerView = UIPickerView()
-        pickerView.delegate = self
-        pickerView.dataSource = self
-        pickerView.backgroundColor = UIColor.black
-        teamNameTextField.inputView = pickerView
+        pickerView1 = UIPickerView()
+        pickerView1.delegate = self
+        pickerView1.dataSource = self
+        pickerView1.backgroundColor = UIColor.black
+        
+        pickerView2 = UIPickerView()
+        pickerView2.delegate = self
+        pickerView2.dataSource = self
+        pickerView2.backgroundColor = UIColor.black
+        
+        pickerView3 = UIPickerView()
+        pickerView3.delegate = self
+        pickerView3.dataSource = self
+        pickerView3.backgroundColor = UIColor.black
+        
+        teamNameTextField.inputView = pickerView1
+        genderTextField.inputView = pickerView2
+        ageTextField.inputView = pickerView3
         
         
         
@@ -104,6 +129,8 @@ class EditProfileTableViewController: UITableViewController, UIImagePickerContro
                 self.usernameTextField.text = user.username
                 self.biographyTextField.text = user.biography
                 self.teamNameTextField.text = user.teamName
+                self.genderTextField.text = user.gender
+                self.ageTextField.text = user.age
                 
             }
             
@@ -140,6 +167,8 @@ class EditProfileTableViewController: UITableViewController, UIImagePickerContro
         let finalEmail = email.trimmingCharacters(in: CharacterSet.whitespaces)
         let teamName = teamNameTextField.text!
         let biography = biographyTextField.text!
+        let gender = genderTextField.text!
+        let age = ageTextField.text!
         let username = usernameTextField.text!
         let userPicture = userImageView.image
 
@@ -187,7 +216,7 @@ class EditProfileTableViewController: UITableViewController, UIImagePickerContro
                         if error == nil {
                             let user = FIRAuth.auth()!.currentUser!
                             
-                            let userInfo = ["email": user.email!, "username": username, "teamName": teamName,"biography": biography, "uid": user.uid, "photoURL": String(describing: user.photoURL!)]
+                            let userInfo = ["email": user.email!, "username": username, "teamName": teamName,"biography": biography,"gender":gender,"age":age, "uid": user.uid, "photoURL": String(describing: user.photoURL!)]
                             
                             let userRef = self.databaseRef.child("users").child(user.uid)
                             
@@ -227,12 +256,14 @@ class EditProfileTableViewController: UITableViewController, UIImagePickerContro
 
         
     }
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         usernameTextField.resignFirstResponder()
         emailTextField.resignFirstResponder()
         teamNameTextField.resignFirstResponder()
         biographyTextField.resignFirstResponder()
+        genderTextField.resignFirstResponder()
+        ageTextField.resignFirstResponder()
+        
         return true
     }
     
@@ -289,27 +320,67 @@ class EditProfileTableViewController: UITableViewController, UIImagePickerContro
     
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return teamArrays[row]
+        if pickerView1 == pickerView{
+          return teamArrays[row]
+        }
+        
+        if pickerView2 == pickerView {
+            return genderArrays[row]
+        }
+        if pickerView3 == pickerView {
+            return ageArrays[row]
+        }
+        return ""
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        teamNameTextField.text = teamArrays[row]
+        if pickerView1 == pickerView {
+            teamNameTextField.text = teamArrays[row]
+        }
+        if pickerView2 == pickerView {
+            genderTextField.text = genderArrays[row]
+        }
+        if pickerView3 == pickerView {
+            ageTextField.text = ageArrays[row]
+        }
+
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return teamArrays.count
+        if pickerView1 == pickerView {
+            return teamArrays.count
+        }
+        if pickerView2 == pickerView {
+            return genderArrays.count
+        }
+        if pickerView3 == pickerView {
+            return ageArrays.count
+        }
+        
+        return 0
     }
     
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
         
-        let title = NSAttributedString(string: teamArrays[row], attributes: [NSForegroundColorAttributeName: UIColor.white])
-        return title
+        if pickerView1 == pickerView {
+            
+            return NSAttributedString(string: teamArrays[row], attributes: [NSForegroundColorAttributeName: UIColor.white])
+        }
+        if pickerView2 == pickerView {
+            
+            return NSAttributedString(string: genderArrays[row], attributes: [NSForegroundColorAttributeName: UIColor.white])
+        }
+        if pickerView3 == pickerView {
+            
+            return NSAttributedString(string: ageArrays[row], attributes: [NSForegroundColorAttributeName: UIColor.white])
+        }
+
+        return NSAttributedString(string: "", attributes: [NSForegroundColorAttributeName: UIColor.white])
     }
     
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
-    
     
 }
