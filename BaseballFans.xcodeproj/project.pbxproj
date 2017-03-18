@@ -32,6 +32,7 @@
 		6510FC361E77CE4100C476F0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6510FC351E77CE4100C476F0 /* GoogleService-Info.plist */; };
 		6510FC3A1E78082300C476F0 /* ConversationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6510FC391E78082300C476F0 /* ConversationsTableViewController.swift */; };
 		6510FC3C1E78085700C476F0 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6510FC3B1E78085700C476F0 /* ChatViewController.swift */; };
+		6510FC401E7D0CD900C476F0 /* FollowersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6510FC3F1E7D0CD900C476F0 /* FollowersTableViewController.swift */; };
 		654383021E77C5F100BEAA7D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654383011E77C5F100BEAA7D /* AppDelegate.swift */; };
 		654383071E77C5F100BEAA7D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 654383051E77C5F100BEAA7D /* Main.storyboard */; };
 		654383091E77C5F100BEAA7D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 654383081E77C5F100BEAA7D /* Assets.xcassets */; };
@@ -65,6 +66,7 @@
 		6510FC351E77CE4100C476F0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6510FC391E78082300C476F0 /* ConversationsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsTableViewController.swift; sourceTree = "<group>"; };
 		6510FC3B1E78085700C476F0 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		6510FC3F1E7D0CD900C476F0 /* FollowersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowersTableViewController.swift; sourceTree = "<group>"; };
 		654382FE1E77C5F100BEAA7D /* BaseballFans.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaseballFans.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		654383011E77C5F100BEAA7D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		654383061E77C5F100BEAA7D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				6510FC0C1E77CB9B00C476F0 /* UsersViewController.swift */,
 				6510FC0D1E77CB9B00C476F0 /* UsersTableViewController.swift */,
 				6510FC0E1E77CB9B00C476F0 /* UsersTableViewCell.swift */,
+				6510FC3F1E7D0CD900C476F0 /* FollowersTableViewController.swift */,
 			);
 			name = Friends;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 				6510FC331E77CC1F00C476F0 /* CustomizableTextField.swift in Sources */,
 				6510FC2B1E77CC0E00C476F0 /* User.swift in Sources */,
 				6510FC221E77CBF600C476F0 /* ResetPasswordViewController.swift in Sources */,
+				6510FC401E7D0CD900C476F0 /* FollowersTableViewController.swift in Sources */,
 				6510FC201E77CBF600C476F0 /* LoginViewController.swift in Sources */,
 				6510FC2E1E77CC0E00C476F0 /* ChatFunctions.swift in Sources */,
 				6510FC2D1E77CC0E00C476F0 /* ChatRoom.swift in Sources */,

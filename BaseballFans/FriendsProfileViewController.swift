@@ -20,10 +20,10 @@ class FriendsProfileViewController: UIViewController {
     @IBOutlet weak var biography: UILabel!
     @IBOutlet weak var gender: UILabel!
     @IBOutlet weak var age: UILabel!
-    @IBOutlet weak var followingsNum: UILabel!
-    @IBOutlet weak var followersNum: UILabel!
     @IBOutlet weak var followLabel: UILabel!
     @IBOutlet weak var followButton: UIButton!
+    @IBOutlet weak var followingNumBtn: UIButton!
+    @IBOutlet weak var followerNumBtn: UIButton!
     
     var followFlage:Bool!
     
@@ -60,7 +60,7 @@ class FriendsProfileViewController: UIViewController {
                     
                     self.user.followersNum = self.user.followersNum! + 1
                     let followersNum = ["followersNum": self.user.followersNum]
-
+                    self.followerNumBtn.setTitle("\(self.user.followersNum!)", for: .normal)
                      currentUserRef.updateChildValues(followingsNum)
                      currentFriendRef.updateChildValues(followersNum)
                     
@@ -95,6 +95,7 @@ class FriendsProfileViewController: UIViewController {
                     let followingsNum = ["followingsNum": currentUser.followingsNum!]
                     self.user.followersNum = self.user.followersNum! - 1
                     let followersNum = ["followersNum": self.user.followersNum]
+                    self.followerNumBtn.setTitle("\(self.user.followersNum!)", for: .normal)
                     
                     currentUserRef.updateChildValues(followingsNum)
                     currentFriendRef.updateChildValues(followersNum)
@@ -154,6 +155,11 @@ class FriendsProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+      loadUser()
+    }
+
+    
+    func loadUser(){
         
         self.title = user.username
         
@@ -163,8 +169,10 @@ class FriendsProfileViewController: UIViewController {
         self.account.text = "@"+user.account
         self.gender.text = user.gender
         self.age.text = user.age
-        self.followingsNum.text = "\(user.followingsNum!)"
-        self.followersNum.text = "\(user.followersNum!)"
+        self.followingNumBtn.setTitle("\(user.followingsNum!)", for: .normal)
+        self.followingNumBtn.setTitleColor(UIColor.black, for: .normal)
+        self.followerNumBtn.setTitle("\(user.followersNum!)", for: .normal)
+        self.followerNumBtn.setTitleColor(UIColor.black, for: .normal)
         
         setFollowState()
         
@@ -177,8 +185,8 @@ class FriendsProfileViewController: UIViewController {
         FIRStorage.storage().reference(forURL: user.photoURL).data(withMaxSize: 1 * 1024 * 1024, completion: { (imgData, error) in
             if let error = error {
                 print(error)
-//                let alertView = SCLAlertView()
-//                _ = alertView.showError("ERROR", subTitle: error.localizedDescription)
+                //                let alertView = SCLAlertView()
+                //                _ = alertView.showError("ERROR", subTitle: error.localizedDescription)
                 
             }else{
                 
@@ -200,6 +208,15 @@ class FriendsProfileViewController: UIViewController {
             chatVC.senderId = FIRAuth.auth()!.currentUser!.uid
             chatVC.senderDisplayName = FIRAuth.auth()!.currentUser!.displayName!
             chatVC.chatRoomId = chatFunctions.chatRoom_id
+        }
+       else if segue.identifier == "goToFollowing"{
+            let followingsVC = segue.destination as! FollowersTableViewController
+           followingsVC.user = self.user
+           followingsVC.flag = "followings"
+        }else if segue.identifier == "goToFollower"{
+            let followingsVC = segue.destination as! FollowersTableViewController
+            followingsVC.user = self.user
+            followingsVC.flag = "followers"
         }
     }
     

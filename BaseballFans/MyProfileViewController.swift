@@ -20,8 +20,8 @@ class MyProfileViewController: UIViewController {
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var gender: UILabel!
     @IBOutlet weak var age: UILabel!
-    @IBOutlet weak var followingsNum: UILabel!
-    @IBOutlet weak var followersNum: UILabel!
+    @IBOutlet weak var followingNumBtn: UIButton!
+    @IBOutlet weak var followerNumBtn: UIButton!
     
     var user: User!
     
@@ -54,8 +54,10 @@ class MyProfileViewController: UIViewController {
                 self.country.text = user.teamName
                 self.gender.text = user.gender
                 self.age.text = user.age
-                self.followingsNum.text = "\(user.followingsNum!)"
-                self.followersNum.text = "\(user.followersNum!)"
+                self.followingNumBtn.setTitle("\(user.followingsNum!)", for: .normal)
+                self.followingNumBtn.setTitleColor(UIColor.black, for: .normal)
+                self.followerNumBtn.setTitle("\(user.followersNum!)", for: .normal)
+                self.followerNumBtn.setTitleColor(UIColor.black, for: .normal)
                 
                 if user.biography == ""{
                   self.biography.text = "This person is so lazy and wrote nothing here..."
@@ -110,6 +112,18 @@ class MyProfileViewController: UIViewController {
 //            _ = alertView.showError("ERROR", subTitle: error.localizedDescription)
         }
         
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showFollowings"{
+            let followingsVC = segue.destination as! FollowersTableViewController
+            followingsVC.user = self.user
+            followingsVC.flag = "followings"
+        }else if segue.identifier == "showFollowers"{
+            let followingsVC = segue.destination as! FollowersTableViewController
+            followingsVC.user = self.user
+            followingsVC.flag = "followers"
+        }
     }
 
 }
