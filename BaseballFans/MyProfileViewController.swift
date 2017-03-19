@@ -11,7 +11,7 @@ import FirebaseAuth
 import FirebaseStorage
 import FirebaseDatabase
 
-class MyProfileViewController: UIViewController {
+class MyProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var account: UILabel!
     @IBOutlet weak var biography: UILabel!
@@ -22,15 +22,30 @@ class MyProfileViewController: UIViewController {
     @IBOutlet weak var age: UILabel!
     @IBOutlet weak var followingNumBtn: UIButton!
     @IBOutlet weak var followerNumBtn: UIButton!
+    @IBOutlet weak var tableView: UITableView!
     
     var user: User!
     
+    var postsArray = [Post]()
+    
+    var databaseRef: FIRDatabaseReference! {
+        return FIRDatabase.database().reference()
+    }
+    
+    var storageRef: FIRStorage!{
+        return FIRStorage.storage()
+    }
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        userImageView.layer.cornerRadius = userImageView.layer.frame.width/2
-    
+        tableView.delegate = self
+        tableView.dataSource = self
         
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 307
+        fetchPosts()
+        userImageView.layer.cornerRadius = userImageView.layer.frame.width/2   
     }
     
     
@@ -113,6 +128,99 @@ class MyProfileViewController: UIViewController {
         }
         
     }
+    
+    fileprivate func fetchPosts(){
+        
+        databaseRef.child("Posts").observe(.value, with: { (posts) in
+            
+            var newPostsArray = [Post]()
+            for post in posts.children {
+                
+                let newPost = Post(snapshot: post as! FIRDataSnapshot)
+                newPostsArray.insert(newPost, at: 0)
+            }
+            
+            self.postsArray = newPostsArray
+            self.tableView.reloadData()
+            
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return postsArray.count
+        
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if postsArray[indexPath.row].isSwitched == true {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "postWithImage", for: indexPath) as! ImagePostTableViewCell
+            cell.account.text = "@" + postsArray[indexPath.row].account
+            cell.username.text =  postsArray[indexPath.row].username
+            cell.post.text = postsArray[indexPath.row].postText
+            
+            storageRef.reference(forURL: postsArray[indexPath.row].userImageURL).data(withMaxSize: 1 * 1024 * 1024, completion: { (data, error) in
+                if error == nil {
+                    
+                    DispatchQueue.main.async(execute: {
+                        if let data = data {
+                            cell.userImage.image = UIImage(data: data)
+                        }
+                    })
+                    
+                    
+                }else {
+                    print(error!.localizedDescription)
+                }
+            })
+            
+            storageRef.reference(forURL: postsArray[indexPath.row].postImageURL).data(withMaxSize: 1 * 1024 * 1024, completion: { (data, error) in
+                print("hehehe1",self.postsArray[indexPath.row].postImageURL)
+                if error == nil {
+                    
+                    DispatchQueue.main.async(execute: {
+                        if let data = data {
+                            cell.postImage.image = UIImage(data: data)
+                        }
+                    })
+                    
+                    
+                }else {
+                    print(error!.localizedDescription)
+                }
+            })
+            
+            
+            return cell
+        }else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "postWithText", for: indexPath) as! PostsTableViewCell
+            
+            cell.account.text = "@" + postsArray[indexPath.row].account
+            cell.username.text =  postsArray[indexPath.row].username
+            cell.post.text = postsArray[indexPath.row].postText
+            
+            storageRef.reference(forURL: postsArray[indexPath.row].userImageURL).data(withMaxSize: 1 * 1024 * 1024, completion: { (data, error) in
+                if error == nil {
+                    
+                    DispatchQueue.main.async(execute: {
+                        if let data = data {
+                            cell.userImage.image = UIImage(data: data)
+                        }
+                    })
+                    
+                    
+                }else {
+                    print(error!.localizedDescription)
+                }
+            })
+            
+            return cell
+            
+        }
+    }
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showFollowings"{

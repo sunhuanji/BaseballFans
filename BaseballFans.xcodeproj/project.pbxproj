@@ -33,6 +33,11 @@
 		6510FC3A1E78082300C476F0 /* ConversationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6510FC391E78082300C476F0 /* ConversationsTableViewController.swift */; };
 		6510FC3C1E78085700C476F0 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6510FC3B1E78085700C476F0 /* ChatViewController.swift */; };
 		6510FC401E7D0CD900C476F0 /* FollowersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6510FC3F1E7D0CD900C476F0 /* FollowersTableViewController.swift */; };
+		6510FC441E7E536F00C476F0 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6510FC431E7E536F00C476F0 /* Post.swift */; };
+		6510FC471E7E572900C476F0 /* PostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6510FC461E7E572900C476F0 /* PostsViewController.swift */; };
+		6510FC491E7E57DF00C476F0 /* PostsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6510FC481E7E57DF00C476F0 /* PostsTableViewCell.swift */; };
+		6510FC4B1E7E613800C476F0 /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6510FC4A1E7E613800C476F0 /* AddPostViewController.swift */; };
+		6510FC4D1E7E62C500C476F0 /* ImagePostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6510FC4C1E7E62C500C476F0 /* ImagePostTableViewCell.swift */; };
 		654383021E77C5F100BEAA7D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654383011E77C5F100BEAA7D /* AppDelegate.swift */; };
 		654383071E77C5F100BEAA7D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 654383051E77C5F100BEAA7D /* Main.storyboard */; };
 		654383091E77C5F100BEAA7D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 654383081E77C5F100BEAA7D /* Assets.xcassets */; };
@@ -67,6 +72,11 @@
 		6510FC391E78082300C476F0 /* ConversationsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsTableViewController.swift; sourceTree = "<group>"; };
 		6510FC3B1E78085700C476F0 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		6510FC3F1E7D0CD900C476F0 /* FollowersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowersTableViewController.swift; sourceTree = "<group>"; };
+		6510FC431E7E536F00C476F0 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		6510FC461E7E572900C476F0 /* PostsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostsViewController.swift; sourceTree = "<group>"; };
+		6510FC481E7E57DF00C476F0 /* PostsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostsTableViewCell.swift; sourceTree = "<group>"; };
+		6510FC4A1E7E613800C476F0 /* AddPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPostViewController.swift; sourceTree = "<group>"; };
+		6510FC4C1E7E62C500C476F0 /* ImagePostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePostTableViewCell.swift; sourceTree = "<group>"; };
 		654382FE1E77C5F100BEAA7D /* BaseballFans.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaseballFans.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		654383011E77C5F100BEAA7D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		654383061E77C5F100BEAA7D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -125,6 +135,17 @@
 			name = Login;
 			sourceTree = "<group>";
 		};
+		6510FC451E7E570600C476F0 /* Posts */ = {
+			isa = PBXGroup;
+			children = (
+				6510FC461E7E572900C476F0 /* PostsViewController.swift */,
+				6510FC481E7E57DF00C476F0 /* PostsTableViewCell.swift */,
+				6510FC4A1E7E613800C476F0 /* AddPostViewController.swift */,
+				6510FC4C1E7E62C500C476F0 /* ImagePostTableViewCell.swift */,
+			);
+			name = Posts;
+			sourceTree = "<group>";
+		};
 		654382F51E77C5F100BEAA7D = {
 			isa = PBXGroup;
 			children = (
@@ -163,6 +184,7 @@
 				6510FC261E77CC0E00C476F0 /* Message.swift */,
 				6510FC271E77CC0E00C476F0 /* ChatRoom.swift */,
 				6510FC281E77CC0E00C476F0 /* ChatFunctions.swift */,
+				6510FC431E7E536F00C476F0 /* Post.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -182,6 +204,7 @@
 		654383151E77C6E400BEAA7D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				6510FC451E7E570600C476F0 /* Posts */,
 				6510FC1C1E77CBC900C476F0 /* Login */,
 				6510FC071E77CB7100C476F0 /* Setting */,
 				654383191E77C8BC00BEAA7D /* Profiles */,
@@ -360,6 +383,7 @@
 				654383021E77C5F100BEAA7D /* AppDelegate.swift in Sources */,
 				6510FC0B1E77CB8200C476F0 /* EditProfileTableViewController.swift in Sources */,
 				6510FC291E77CC0E00C476F0 /* SCLAlertView.swift in Sources */,
+				6510FC471E7E572900C476F0 /* PostsViewController.swift in Sources */,
 				6510FC131E77CB9B00C476F0 /* UsersTableViewController.swift in Sources */,
 				6510FC161E77CB9B00C476F0 /* ConversationsTableViewCell.swift in Sources */,
 				6510FC1A1E77CBB100C476F0 /* MyProfileViewController.swift in Sources */,
@@ -374,14 +398,18 @@
 				6510FC1B1E77CBB100C476F0 /* FriendsProfileViewController.swift in Sources */,
 				6510FC3A1E78082300C476F0 /* ConversationsTableViewController.swift in Sources */,
 				6510FC2A1E77CC0E00C476F0 /* AuthenticationService.swift in Sources */,
+				6510FC441E7E536F00C476F0 /* Post.swift in Sources */,
+				6510FC491E7E57DF00C476F0 /* PostsTableViewCell.swift in Sources */,
 				6510FC331E77CC1F00C476F0 /* CustomizableTextField.swift in Sources */,
 				6510FC2B1E77CC0E00C476F0 /* User.swift in Sources */,
 				6510FC221E77CBF600C476F0 /* ResetPasswordViewController.swift in Sources */,
 				6510FC401E7D0CD900C476F0 /* FollowersTableViewController.swift in Sources */,
 				6510FC201E77CBF600C476F0 /* LoginViewController.swift in Sources */,
+				6510FC4D1E7E62C500C476F0 /* ImagePostTableViewCell.swift in Sources */,
 				6510FC2E1E77CC0E00C476F0 /* ChatFunctions.swift in Sources */,
 				6510FC2D1E77CC0E00C476F0 /* ChatRoom.swift in Sources */,
 				6510FC0A1E77CB8200C476F0 /* SettingsTableViewController.swift in Sources */,
+				6510FC4B1E7E613800C476F0 /* AddPostViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

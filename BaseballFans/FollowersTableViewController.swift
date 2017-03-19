@@ -47,23 +47,16 @@ class FollowersTableViewController: UITableViewController {
         if self.flag == "followers"{
           followRef = dataBaseRef.child("users").child(self.user.uid).child("Followers")
         }
-        print("hehehe1",followRef)
         
         followRef.observeSingleEvent(of: .value, with: { (snapshot) in
             for user in snapshot.children {
                 
                 let newUser = User(snapshot: user as! FIRDataSnapshot)
-                    
-                    //allusers.append(newUser)
+
                     self.usersUidArray.append(newUser.uid)
-                   print("hehehe2",newUser.uid)
             
                 
             }
-//            self.usersArray = allusers.sorted(by: { (user1, user2) -> Bool in
-//                user1.username < user2.username
-//                
-//            })
             
             for userUid in self.usersUidArray{
                 
@@ -123,8 +116,6 @@ class FollowersTableViewController: UITableViewController {
         storageRef.reference(forURL: usersArray[indexPath.row].photoURL).data(withMaxSize: 1 * 1024 * 1024) { (imgData, error) in
             if let error = error {
                 print(error)
-                //                let alertView = SCLAlertView()
-                //                _ = alertView.showError("ERROR", subTitle: error.localizedDescription)
             }else {
                 DispatchQueue.main.async(execute: {
                     if let data = imgData {
