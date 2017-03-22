@@ -25,6 +25,7 @@ class MyProfileViewController: UIViewController, UITableViewDataSource, UITableV
     @IBOutlet weak var tableView: UITableView!
     
     var user: User!
+    var currentUser:User!
     
     var postsArray = [Post]()
     
@@ -44,7 +45,7 @@ class MyProfileViewController: UIViewController, UITableViewDataSource, UITableV
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 307
-        fetchPosts()
+
         userImageView.layer.cornerRadius = userImageView.layer.frame.width/2   
     }
     
@@ -79,6 +80,8 @@ class MyProfileViewController: UIViewController, UITableViewDataSource, UITableV
                 }else{
                   self.biography.text = user.biography
                 }
+                
+                self.fetchPosts()
                 
                 FIRStorage.storage().reference(forURL: user.photoURL).data(withMaxSize: 1 * 1024 * 1024, completion: { (imgData, error) in
                     if let error = error {
@@ -131,7 +134,7 @@ class MyProfileViewController: UIViewController, UITableViewDataSource, UITableV
     
     fileprivate func fetchPosts(){
         
-        databaseRef.child("Posts").observe(.value, with: { (posts) in
+        databaseRef.child("Posts").queryOrdered(byChild: "account").queryEqual(toValue: self.user.account).observe(.value, with: { (posts) in
             
             var newPostsArray = [Post]()
             for post in posts.children {
@@ -177,7 +180,6 @@ class MyProfileViewController: UIViewController, UITableViewDataSource, UITableV
             })
             
             storageRef.reference(forURL: postsArray[indexPath.row].postImageURL).data(withMaxSize: 1 * 1024 * 1024, completion: { (data, error) in
-                print("hehehe1",self.postsArray[indexPath.row].postImageURL)
                 if error == nil {
                     
                     DispatchQueue.main.async(execute: {

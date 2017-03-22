@@ -20,9 +20,23 @@ class PostsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     var storageRef: FIRStorage!{
         return FIRStorage.storage()
     }
+    var currentUser:User!
+    @IBAction func indexChanged(_ sender: Any) {
+        switch segmentedControl.selectedSegmentIndex
+        {
+        case 0:
+            fetchPosts(Type: true)
+        case 1:
+            fetchPosts(Type: false)
+        default:
+            break
+        }
+    }
     
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
     var postsArray = [Post]()
+    var usersUidArray = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,31 +48,101 @@ class PostsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 307
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
-        fetchPosts()
+        if segmentedControl.selectedSegmentIndex == 0{
+            let currentUser1 = FIRAuth.auth()!.currentUser!
+            databaseRef.child("users").queryOrdered(byChild: "uid").queryEqual(toValue:currentUser1.uid).observe(.value, with: { (snapshot) in
+                for user in snapshot.children {
+                    self.currentUser = User(snapshot: user as! FIRDataSnapshot)
+                    self.fetchPosts(Type: true)
+                }
+                
+            })
+        }else{
+            let currentUser1 = FIRAuth.auth()!.currentUser!
+            databaseRef.child("users").queryOrdered(byChild: "uid").queryEqual(toValue:currentUser1.uid).observe(.value, with: { (snapshot) in
+                for user in snapshot.children {
+                    self.currentUser = User(snapshot: user as! FIRDataSnapshot)
+                    self.fetchPosts(Type: false)
+                }
+                
+            })
+        }
+
     }
     
     
-    fileprivate func fetchPosts(){
+    fileprivate func fetchPosts(Type:Bool){
         
-        databaseRef.child("Posts").observe(.value, with: { (posts) in
-            
-            var newPostsArray = [Post]()
-            for post in posts.children {
+        if Type == true{
+ 
+            databaseRef.child("Posts").observe(.value, with: { (posts) in
                 
-                let newPost = Post(snapshot: post as! FIRDataSnapshot)
-                newPostsArray.insert(newPost, at: 0)
+                
+                var newPostsArray = [Post]()
+                for post in posts.children {
+                    
+                    let newPost = Post(snapshot: post as! FIRDataSnapshot)
+                    newPostsArray.insert(newPost, at: 0)
+                }
+                
+                self.postsArray = newPostsArray
+                self.tableView.reloadData()
+                
+            }) { (error) in
+                print(error.localizedDescription)
             }
             
-            self.postsArray = newPostsArray
-            self.tableView.reloadData()
+        
+        }else{
             
-        }) { (error) in
-            print(error.localizedDescription)
+            let followRef = databaseRef.child("users").child(self.currentUser.uid).child("Followings")
+            
+            followRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                self.usersUidArray = []
+                var newPostsArray = [Post]()
+                for user in snapshot.children {
+                    
+                    let newUser = User(snapshot: user as! FIRDataSnapshot)
+                    
+                    self.usersUidArray.append(newUser.account)
+                    
+                    
+                }
+                
+                if self.usersUidArray.count == 0{
+                  self.postsArray = newPostsArray
+                    self.tableView.reloadData()
+                }
+                
+                for userUid in self.usersUidArray{
+                    
+                    self.databaseRef.child("Posts").queryOrdered(byChild: "account").queryEqual(toValue: userUid).observe(.value, with: { (posts) in
+                        
+ 
+                        for post in posts.children {
+                            
+                            let newPost = Post(snapshot: post as! FIRDataSnapshot)
+                            newPostsArray.insert(newPost, at: 0)
+                        }
+                        
+                        self.postsArray = newPostsArray
+
+                        self.tableView.reloadData()
+                        
+                    }) { (error) in
+                        print(error.localizedDescription)
+                    }
+                }
+            }) { (error) in
+                
+            }
+
+        
         }
         
     }
@@ -91,7 +175,6 @@ class PostsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
             })
             
             storageRef.reference(forURL: postsArray[indexPath.row].postImageURL).data(withMaxSize: 1 * 1024 * 1024, completion: { (data, error) in
-                print("hehehe1",self.postsArray[indexPath.row].postImageURL)
                 if error == nil {
                     
                     DispatchQueue.main.async(execute: {

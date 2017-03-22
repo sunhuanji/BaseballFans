@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BaseballFans/FriendsProfileViewController.swift"
-            timestampString = "511606386.190709"
+            timestampString = "511869051.237763"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "122"
-            endingLineNumber = "122"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
             landmarkName = "followButtonPressed(_:)"
             landmarkType = "7">
          </BreakpointContent>

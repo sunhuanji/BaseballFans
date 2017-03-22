@@ -45,8 +45,7 @@ class FriendsProfileViewController: UIViewController, UITableViewDataSource, UIT
     
     
     @IBAction func followButtonPressed(_ sender: Any) {
-        
-        print("press",self.followFlage)
+
         if self.followFlage == false{
             let currentUser1 = FIRAuth.auth()!.currentUser!
             databaseRef.child("users").queryOrdered(byChild: "uid").queryEqual(toValue:currentUser1.uid).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -222,7 +221,6 @@ class FriendsProfileViewController: UIViewController, UITableViewDataSource, UIT
                 self.followFlage = true
                 self.followButton.setImage(UIImage(named: "Following"), for: UIControlState.normal)
                 self.followLabel.text = "Following"
-                print("in", self.followFlage)
                 
             }
         })
@@ -231,7 +229,7 @@ class FriendsProfileViewController: UIViewController, UITableViewDataSource, UIT
     
     fileprivate func fetchPosts(){
         
-        databaseRef.child("Posts").observe(.value, with: { (posts) in
+        databaseRef.child("Posts").queryOrdered(byChild: "account").queryEqual(toValue: self.user.account).observe(.value, with: { (posts) in
             
             var newPostsArray = [Post]()
             for post in posts.children {
@@ -246,6 +244,7 @@ class FriendsProfileViewController: UIViewController, UITableViewDataSource, UIT
         }) { (error) in
             print(error.localizedDescription)
         }
+
         
     }
     
@@ -277,7 +276,7 @@ class FriendsProfileViewController: UIViewController, UITableViewDataSource, UIT
             })
             
             storageRef.reference(forURL: postsArray[indexPath.row].postImageURL).data(withMaxSize: 1 * 1024 * 1024, completion: { (data, error) in
-                print("hehehe1",self.postsArray[indexPath.row].postImageURL)
+
                 if error == nil {
                     
                     DispatchQueue.main.async(execute: {

@@ -43,7 +43,7 @@ struct ChatFunctions{
     fileprivate func createChatRoomId(_ user1: User, user2: User, members:[String], chatRoomId: String){
         
         let chatRoomRef = databaseRef.child("ChatRooms").queryOrdered(byChild: "chatRoomId").queryEqual(toValue: chatRoomId)
-        chatRoomRef.observe(.value, with: { (snapshot) in
+        chatRoomRef.observeSingleEvent(of:.value, with: { (snapshot) in
             
             var createChatRoom = true
             

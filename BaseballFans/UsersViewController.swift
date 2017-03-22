@@ -46,6 +46,7 @@ class UsersViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        if segmentedControl.selectedSegmentIndex == 0{
         let currentUser1 = FIRAuth.auth()!.currentUser!
         dataBaseRef.child("users").queryOrdered(byChild: "uid").queryEqual(toValue:currentUser1.uid).observe(.value, with: { (snapshot) in
             for user in snapshot.children {
@@ -56,6 +57,19 @@ class UsersViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         }) { (error) in
 //            let alertView = SCLAlertView()
 //            _ = alertView.showError("ERROR", subTitle: error.localizedDescription)
+        }
+        }else{
+            let currentUser1 = FIRAuth.auth()!.currentUser!
+            dataBaseRef.child("users").queryOrdered(byChild: "uid").queryEqual(toValue:currentUser1.uid).observe(.value, with: { (snapshot) in
+                for user in snapshot.children {
+                    self.currentUser = User(snapshot: user as! FIRDataSnapshot)
+                    self.loadUsers(teamName: self.currentUser.teamName!, teamType:false)
+                }
+                
+            }) { (error) in
+
+            }
+         
         }
     }
     
