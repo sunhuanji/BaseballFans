@@ -10,6 +10,7 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
+import Kingfisher
 
 class UsersViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
@@ -168,23 +169,13 @@ class UsersViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         
         cell.usernameLabel.text = usersArray[indexPath.row].username
         cell.userTeamNameLabel.text = usersArray[indexPath.row].teamName
-        storageRef.reference(forURL: usersArray[indexPath.row].photoURL).data(withMaxSize: 1 * 1024 * 1024) { (imgData, error) in
-            if let error = error {
-                print(error)
-//                let alertView = SCLAlertView()
-//                _ = alertView.showError("ERROR", subTitle: error.localizedDescription)
-            }else {
-                
-                
-                DispatchQueue.main.async(execute: {
-                    if let data = imgData {
-                        cell.userImageView.image = UIImage(data: data)
-                        //cell.userImageView.layer.cornerRadius = cell.userImageView.frame.width/2
-                    }
-                })
-            }
-        }
         
+
+
+        DispatchQueue.main.async(execute: {
+            let url = URL(string: usersArray[indexPath.row].photoURL)
+            cell.userImageView.kf.setImage(with: url)
+        })
         
     }
     

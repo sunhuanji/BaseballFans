@@ -51,5 +51,53 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BaseballFans/ConversationsTableViewController.swift"
+            timestampString = "512378830.017241"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
+            landmarkName = "fetchChats()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BaseballFans.ConversationsTableViewController.(fetchChats () -&gt; ()).(closure #3)"
+                  moduleName = "BaseballFans"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sunhuanji/Documents/Xcode/BaseballFans/BaseballFans/ConversationsTableViewController.swift"
+                  timestampString = "512378518.01182"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "108"
+                  endingLineNumber = "108"
+                  offsetFromSymbolStart = "7535">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BaseballFans.ConversationsTableViewController.(fetchChats () -&gt; ()).(closure #3).(closure #1)"
+                  moduleName = "BaseballFans"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sunhuanji/Documents/Xcode/BaseballFans/BaseballFans/ConversationsTableViewController.swift"
+                  timestampString = "512378518.016964"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "108"
+                  endingLineNumber = "108"
+                  offsetFromSymbolStart = "2077">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

@@ -159,35 +159,11 @@ class PostsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
             cell.username.text =  postsArray[indexPath.row].username
             cell.post.text = postsArray[indexPath.row].postText
             
-            storageRef.reference(forURL: postsArray[indexPath.row].userImageURL).data(withMaxSize: 1 * 1024 * 1024, completion: { (data, error) in
-                if error == nil {
-                    
-                    DispatchQueue.main.async(execute: {
-                        if let data = data {
-                            cell.userImage.image = UIImage(data: data)
-                        }
-                    })
-                    
-                    
-                }else {
-                    print(error!.localizedDescription)
-                }
-            })
+            let userUrl = URL(string: postsArray[indexPath.row].userImageURL)
+            cell.userImage.kf.setImage(with: userUrl)
             
-            storageRef.reference(forURL: postsArray[indexPath.row].postImageURL).data(withMaxSize: 1 * 1024 * 1024, completion: { (data, error) in
-                if error == nil {
-                    
-                    DispatchQueue.main.async(execute: {
-                        if let data = data {
-                            cell.postImage.image = UIImage(data: data)
-                        }
-                    })
-                    
-                    
-                }else {
-                    print(error!.localizedDescription)
-                }
-            })
+            let postUrl = URL(string: postsArray[indexPath.row].postImageURL)
+            cell.postImage.kf.setImage(with: postUrl)
             
             
             return cell
@@ -197,23 +173,12 @@ class PostsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
             cell.account.text = "@" + postsArray[indexPath.row].account
             cell.username.text =  postsArray[indexPath.row].username
             cell.post.text = postsArray[indexPath.row].postText
-            
-            storageRef.reference(forURL: postsArray[indexPath.row].userImageURL).data(withMaxSize: 1 * 1024 * 1024, completion: { (data, error) in
-                if error == nil {
-                    
-                    DispatchQueue.main.async(execute: {
-                        if let data = data {
-                            cell.userImage.image = UIImage(data: data)
-                        }
-                    })
-                    
-                    
-                }else {
-                    print(error!.localizedDescription)
-                }
+            DispatchQueue.main.async(execute: {
+                
+                let userUrl = URL(string: self.postsArray[indexPath.row].userImageURL)
+                cell.userImage.kf.setImage(with: userUrl)
             })
-            
-            return cell
+          return cell
             
         }
     }

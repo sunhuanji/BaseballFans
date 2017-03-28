@@ -165,22 +165,9 @@ class FriendsProfileViewController: UIViewController, UITableViewDataSource, UIT
             self.biography.text = user.biography
         }
         
-        FIRStorage.storage().reference(forURL: user.photoURL).data(withMaxSize: 1 * 1024 * 1024, completion: { (imgData, error) in
-            if let error = error {
-                print(error)
-                //                let alertView = SCLAlertView()
-                //                _ = alertView.showError("ERROR", subTitle: error.localizedDescription)
-                
-            }else{
-                
-                DispatchQueue.main.async(execute: {
-                    if let data = imgData {
-                        self.userImage.image = UIImage(data: data)
-                    }
-                })
-            }
-            
-        })
+        let url = URL(string: user.photoURL)
+        self.userImage.kf.setImage(with: url)
+
     }
     
 
@@ -260,36 +247,11 @@ class FriendsProfileViewController: UIViewController, UITableViewDataSource, UIT
             cell.username.text =  postsArray[indexPath.row].username
             cell.post.text = postsArray[indexPath.row].postText
             
-            storageRef.reference(forURL: postsArray[indexPath.row].userImageURL).data(withMaxSize: 1 * 1024 * 1024, completion: { (data, error) in
-                if error == nil {
-                    
-                    DispatchQueue.main.async(execute: {
-                        if let data = data {
-                            cell.userImage.image = UIImage(data: data)
-                        }
-                    })
-                    
-                    
-                }else {
-                    print(error!.localizedDescription)
-                }
-            })
+            let userUrl = URL(string: postsArray[indexPath.row].userImageURL)
+            cell.userImage.kf.setImage(with: userUrl)
             
-            storageRef.reference(forURL: postsArray[indexPath.row].postImageURL).data(withMaxSize: 1 * 1024 * 1024, completion: { (data, error) in
-
-                if error == nil {
-                    
-                    DispatchQueue.main.async(execute: {
-                        if let data = data {
-                            cell.postImage.image = UIImage(data: data)
-                        }
-                    })
-                    
-                    
-                }else {
-                    print(error!.localizedDescription)
-                }
-            })
+            let postUrl = URL(string: postsArray[indexPath.row].postImageURL)
+            cell.postImage.kf.setImage(with: postUrl)
             
             
             return cell
@@ -300,20 +262,9 @@ class FriendsProfileViewController: UIViewController, UITableViewDataSource, UIT
             cell.username.text =  postsArray[indexPath.row].username
             cell.post.text = postsArray[indexPath.row].postText
             
-            storageRef.reference(forURL: postsArray[indexPath.row].userImageURL).data(withMaxSize: 1 * 1024 * 1024, completion: { (data, error) in
-                if error == nil {
-                    
-                    DispatchQueue.main.async(execute: {
-                        if let data = data {
-                            cell.userImage.image = UIImage(data: data)
-                        }
-                    })
-                    
-                    
-                }else {
-                    print(error!.localizedDescription)
-                }
-            })
+            let userUrl = URL(string: self.postsArray[indexPath.row].userImageURL)
+            cell.userImage.kf.setImage(with: userUrl)
+
             
             return cell
             

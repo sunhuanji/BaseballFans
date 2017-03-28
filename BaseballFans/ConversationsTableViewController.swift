@@ -10,6 +10,7 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
+import Kingfisher
 
 
 class ConversationsTableViewController: UITableViewController {
@@ -27,6 +28,7 @@ class ConversationsTableViewController: UITableViewController {
     }
     
     var chatsArray = [ChatRoom]()
+    var allchats = [ChatRoom]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,22 +61,23 @@ class ConversationsTableViewController: UITableViewController {
             let userPhotoUrl = values["userPhotoUrl"] as! String
             let other_UserPhotoUrl = values["other_UserPhotoUrl"] as! String
             let date = values["date"] as! NSNumber
-
+            
             
             var newChat = ChatRoom(username: username, other_Username: other_Username, userId: userId, other_UserId: other_UserId, members: members, chatRoomId: chatRoomId, lastMessage: lastMessage, userPhotoUrl: userPhotoUrl, other_UserPhotoUrl:other_UserPhotoUrl,date:date)
             newChat.ref = ref
             newChat.key = key
             
             self.chatsArray.insert(newChat, at: 0)
+            self.chatsArray = self.chatsArray.sorted(by: { (chat1, chat2) -> Bool in
+                Int(chat1.date) > Int(chat2.date)
+                
+            })
             self.tableView.reloadData()
             
             
             
-            }) { (error) in
-//                let alertView = SCLAlertView()
-//                _ = alertView.showError("ERROR", subTitle: error.localizedDescription)
-                
-
+        }) { (error) in
+            
         }
         
         
@@ -94,24 +97,26 @@ class ConversationsTableViewController: UITableViewController {
             let userPhotoUrl = values["userPhotoUrl"] as! String
             let other_UserPhotoUrl = values["other_UserPhotoUrl"] as! String
             let date = values["date"] as! NSNumber
-
+            
             var newChat = ChatRoom(username: username, other_Username: other_Username, userId: userId, other_UserId: other_UserId, members: members, chatRoomId: chatRoomId, lastMessage: lastMessage, userPhotoUrl: userPhotoUrl, other_UserPhotoUrl: other_UserPhotoUrl,date:date)
             newChat.ref = ref
             newChat.key = key
             
+
             self.chatsArray.insert(newChat, at: 0)
-            self.tableView.reloadData()
-            
-            
+            self.chatsArray = self.chatsArray.sorted(by: { (chat1, chat2) -> Bool in
+                Int(chat1.date) > Int(chat2.date)
+                
+            })
+
             
         }) { (error) in
-//            let alertView = SCLAlertView()
-//            _ = alertView.showError("ERROR", subTitle: error.localizedDescription)
+            //            let alertView = SCLAlertView()
+            //            _ = alertView.showError("ERROR", subTitle: error.localizedDescription)
             
             
         }
-
-
+        
     }
 
     // MARK: - Table view data source
@@ -125,7 +130,7 @@ class ConversationsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "conversationsCell", for: indexPath) as! ConversationsTableViewCell
         
-        var userPhotoUrlString: String? = ""
+        var userPhotoUrlString: String! = ""
         
         if chatsArray[indexPath.row].userId == FIRAuth.auth()!.currentUser!.uid {
             userPhotoUrlString = chatsArray[indexPath.row].other_UserPhotoUrl
@@ -165,22 +170,9 @@ class ConversationsTableViewController: UITableViewController {
         
         cell.lastMessageLabel.text = chatsArray[indexPath.row].lastMessage
         if let urlString = userPhotoUrlString {
-            storageRef.reference(forURL: urlString).data(withMaxSize: 1 * 1024 * 1024, completion: { (imgData, error) in
-                if let error = error {
-                    print(error)
-//                    let alertView = SCLAlertView()
-//                    _ = alertView.showError("ERROR", subTitle: error.localizedDescription)
-                }else {
-                    
-                    DispatchQueue.main.async(execute: { 
-                        if let data = imgData {
-                            cell.userImageView.image = UIImage(data: data)
-                        }
-                    })
-                    
-                }
-            })
             
+            let url = URL(string: urlString)
+            cell.userImageView.kf.setImage(with: url)
             
         }
         

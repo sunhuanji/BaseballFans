@@ -9,6 +9,7 @@ target 'BaseballFans' do
  pod 'Firebase/Database'
  pod 'Firebase/Storage'
  pod 'JSQMessagesViewController'
+ pod 'Kingfisher'
   # Pods for BaseballFans
 
 end

@@ -10,6 +10,7 @@ import UIKit
 import FirebaseDatabase
 import FirebaseStorage
 import FirebaseAuth
+import Kingfisher
 
 class UsersTableViewController: UITableViewController {
 
