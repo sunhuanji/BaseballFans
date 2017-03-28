@@ -45,6 +45,7 @@ class ConversationsTableViewController: UITableViewController {
 
     func fetchChats(){
         chatsArray.removeAll(keepingCapacity: false)
+        allchats.removeAll(keepingCapacity: false)
         dataBaseRef.child("ChatRooms").queryOrdered(byChild: "userId").queryEqual(toValue: FIRAuth.auth()!.currentUser!.uid).observe(.childAdded, with: { (snapshot) in
             
             let values = snapshot.value as! Dictionary<String,AnyObject>
@@ -108,7 +109,7 @@ class ConversationsTableViewController: UITableViewController {
                 Int(chat1.date) > Int(chat2.date)
                 
             })
-
+            self.tableView.reloadData()
             
         }) { (error) in
             //            let alertView = SCLAlertView()
